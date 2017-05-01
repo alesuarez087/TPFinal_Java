@@ -12,6 +12,28 @@ public class Validate {
 	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
  
+	private static final String PATTERN_NUMERO = "^[+-]?\\d*(\\.\\d+)?";
+	
+	private static final String PATTERN_NOMBRE = "[A-Za-z]+";
+	
+	public static boolean Texto(String cadena){
+		Pattern pattern = Pattern.compile(PATTERN_NOMBRE);
+		Matcher matcher = pattern.matcher(cadena);
+		return matcher.matches();
+	}
+	public static boolean EsNumerico(String numero){
+		Pattern pattern = Pattern.compile(PATTERN_NUMERO);
+		Matcher matcher = pattern.matcher(numero);
+		return matcher.matches();
+	}
+	
+	public static boolean FormatoNumero(String cadena, int valor){
+		if(Validate.EsNumerico(cadena)){
+			if(cadena.length()!=valor) return false;
+			else return true;
+		} else return false;
+	}
+	
     public static boolean Email(String email) {
  
         // Compiles the given regular expression into a pattern.

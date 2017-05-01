@@ -1,37 +1,36 @@
 @CHARSET "ISO-8859-1";
 
 #form {
-  width: 250px;
-  margin: 0 auto;
-  height: 50px;
+	width: 250px;
+	margin: 0 auto;
+	height: 50px;
 }
 
 #form p {
-  text-align: center;
+	text-align: center;
 }
 
 #form label {
-  font-size: 20px;
+	font-size: 50px;
 }
 
 input[type="radio"] {
-  display: none;
+	display: none;
 }
 
 label {
-  color: grey;
+	color: grey;
 }
 
 .clasificacion {
-  direction: rtl;
-  unicode-bidi: bidi-override;
+	direction: rtl;
+	unicode-bidi: bidi-override;
 }
 
-label:hover,
-label:hover ~ label {
-  color: orange;
+label:hover, label:hover ~ label {
+	color: orange;
 }
 
 input[type="radio"]:checked ~ label {
-  color: orange;
+	color: orange;
 }

@@ -83,35 +83,58 @@ public class srvCompra extends HttpServlet {
 		}
 		
 		if(request.getParameter("eventConfirmar")!=null){
-			Venta venta = new Venta(); Item item;
-			Usuario user = (Usuario)request.getSession().getAttribute("userSession");
-			ArrayList<VentaItem> ventaItem = (ArrayList<VentaItem>)request.getSession().getAttribute("carrito");
 			
-			venta.setIdUsuario(user.getId());
-			venta.setNroTarjeta(request.getParameter("nroTarjeta"));
-			venta.setTitularTarjeta(request.getParameter("titTarjeta"));
-			venta.setIdProvincia(ctrl.getOneProvincia(request.getParameter("cmbProvincia")).getId()); 
-			venta.setLocalidad(request.getParameter("localidad"));
-			venta.setCalle(request.getParameter("calle")); 
-			venta.setNroCalle(request.getParameter("nroCalle"));
-			if(!request.getParameter("piso").equals("")) venta.setPiso(request.getParameter("piso"));
-			if(!request.getParameter("nroDpto").equals("")) venta.setNroDpto(request.getParameter("nroDpto"));
-			
-			ctrl.save(venta);
-			venta.setId(ctrl.ultimaVenta());
-			
-			for(VentaItem vi : ventaItem){
-				vi.setIdVenta(venta.getId());
-				item = ctrl.getOneItem(vi.getIdItem());
-				item.quitoStock(vi.getCantidad());
-				item.setState(States.Modificacion);
-				
-				ctrl.save(item);
-				ctrl.save(vi);
+			if(Validate.EsNumerico(request.getParameter("nroCalle"))){
+				if(Validate.FormatoNumero(request.getParameter("nroTarjeta"), 16)){
+					if(Validate.Texto(request.getParameter("localidad"))){
+						if(Validate.Texto(request.getParameter("titTarjeta"))){
+							
+							Venta venta = new Venta(); Item item;
+							Usuario user = (Usuario)request.getSession().getAttribute("userSession");
+							ArrayList<VentaItem> ventaItem = (ArrayList<VentaItem>)request.getSession().getAttribute("carrito");
+							
+							venta.setIdUsuario(user.getId());
+							venta.setNroTarjeta(request.getParameter("nroTarjeta"));
+							venta.setTitularTarjeta(request.getParameter("titTarjeta"));
+							venta.setIdProvincia(ctrl.getOneProvincia(request.getParameter("cmbProvincia")).getId()); 
+							venta.setLocalidad(request.getParameter("localidad"));
+							venta.setCalle(request.getParameter("calle")); 
+							venta.setNroCalle(request.getParameter("nroCalle"));
+							if(!request.getParameter("piso").equals("")) venta.setPiso(request.getParameter("piso"));
+							if(!request.getParameter("nroDpto").equals("")) venta.setNroDpto(request.getParameter("nroDpto"));
+							
+							ctrl.save(venta);
+							venta.setId(ctrl.ultimaVenta());
+							
+							for(VentaItem vi : ventaItem){
+								vi.setIdVenta(venta.getId());
+								item = ctrl.getOneItem(vi.getIdItem());
+								item.quitoStock(vi.getCantidad());
+								item.setState(States.Modificacion);
+								
+								ctrl.save(item);
+								ctrl.save(vi);
+							}
+							request.getSession().setAttribute("carrito", null);
+							request.getSession().setAttribute("compraValida", "Compra exitosa");
+							request.getRequestDispatcher("valid.jsp").forward(request, response);
+							
+						} else{
+							request.getSession().setAttribute("message", "No ingresó Titular de Tarjeta válido");
+							request.getRequestDispatcher("carrito.jsp").forward(request, response);
+						}						
+					} else{
+						request.getSession().setAttribute("message", "No ingresó Localidad válida");
+						request.getRequestDispatcher("carrito.jsp").forward(request, response);
+					}
+				} else{
+					request.getSession().setAttribute("message", "No ingresó Número de tarjeta válido");
+					request.getRequestDispatcher("carrito.jsp").forward(request, response);
+				}
+			} else {
+				request.getSession().setAttribute("message", "No ingresó Número de calle válido");
+				request.getRequestDispatcher("carrito.jsp").forward(request, response);
 			}
-			request.getSession().setAttribute("carrito", null);
-			request.getSession().setAttribute("compraValida", "Compra exitosa");
-			request.getRequestDispatcher("valid.jsp").forward(request, response);
 		}
 	}
 

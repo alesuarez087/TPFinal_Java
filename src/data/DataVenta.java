@@ -115,11 +115,11 @@ public class DataVenta {
 	}
 	
 	public static void Insert(Venta venta){
-		ResultSet rs = null; PreparedStatement stmt = null;
+		ResultSet rs = null; PreparedStatement stmt = null; int idVenta = 0;
 		String sql="{ call VentasInsert(?, ?, ?, ?, ?, ?, ?, ?, ?) };";
 		try{
 			Connection conn = FactoryConexion.getInstancia().getConn();
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, venta.getIdUsuario());
 			stmt.setString(2, venta.getNroTarjeta());
 			stmt.setString(3, venta.getTitularTarjeta());
@@ -130,7 +130,8 @@ public class DataVenta {
 			stmt.setString(8, venta.getPiso());
 			stmt.setString(9, venta.getNroDpto());
 			
-			rs = stmt.executeQuery();
+			stmt.executeQuery();
+			
 		} catch(SQLException e){
 			e.printStackTrace();
 		} catch(ApplicationException e){
