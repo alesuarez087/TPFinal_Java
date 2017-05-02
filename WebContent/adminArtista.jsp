@@ -117,14 +117,13 @@ function valida(){
 
 			<div align="center">
 				<input class="btn btn-success" type="submit" value="Guardar"
-					id="newArtista" name="newArtista" /> <input class="btn btn-default"
-					type="submit" value="Cancelar" id="clearForm" name="clearForm" />
+					id="newArtista" name="newArtista" /> <input
+					class="btn btn-default" type="submit" value="Cancelar"
+					id="clearForm" name="clearForm" />
 			</div>
 		</form>
 
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 
 		<table class="table table-hover">
 			<thead>

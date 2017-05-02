@@ -98,21 +98,11 @@
 						<tr>
 							<td style="text-align: center" class="form-inline" colspan=3>
 								<p class="clasificacion">
-									<input id="radio1" name="estrellas" value="5" type="radio"
-										<%if(clas.getValor()==5){ %> checked <% } %>><label
-										for="radio1">&#9733;</label> <input id="radio2"
-										name="estrellas" value="4" type="radio"
-										<%if(clas.getValor()==4){ %> checked <% } %>><label
-										for="radio2">&#9733;</label> <input id="radio3"
-										name="estrellas" value="3" type="radio"
-										<%if(clas.getValor()==3){ %> checked <% } %>><label
-										for="radio3">&#9733;</label> <input id="radio4"
-										name="estrellas" value="2" type="radio"
-										<%if(clas.getValor()==2){ %> checked <% } %>><label
-										for="radio4">&#9733;</label> <input id="radio5"
-										name="estrellas" value="1" type="radio"
-										<%if(clas.getValor()==1){ %> checked <% } %>><label
-										for="radio5">&#9733;</label>
+									<input id="radio1" name="estrellas" value="5" type="radio" <%if(clas.getValor()==5){ %> checked <% } %>><label for="radio1">&#9733;</label> 
+									<input id="radio2" name="estrellas" value="4" type="radio" <%if(clas.getValor()==4){ %> checked <% } %>><label for="radio2">&#9733;</label> 
+									<input id="radio3" name="estrellas" value="3" type="radio" <%if(clas.getValor()==3){ %> checked <% } %>><label for="radio3">&#9733;</label>
+									<input id="radio4" name="estrellas" value="2" type="radio" <%if(clas.getValor()==2){ %> checked <% } %>><label for="radio4">&#9733;</label> 
+									<input id="radio5" name="estrellas" value="1" type="radio" <%if(clas.getValor()==1){ %> checked <% } %>><label for="radio5">&#9733;</label>
 								</p>
 							</td>
 						</tr>

@@ -45,11 +45,6 @@ public class srvCalificar extends HttpServlet {
 		if(request.getParameter("eventCalif")!=null){
 			
 			Clasificacion clas = (Clasificacion)request.getSession().getAttribute("clas");
-			if(clas != null) clas.setState(States.Modificacion);
-			else{
-				clas = new Clasificacion();
-				clas.setState(States.Alta);
-			}
 			clas.setValor(Integer.parseInt(request.getParameter("estrellas")));
 			clas.setDetalles(request.getParameter("messageAdd"));
 			ctrl.save(clas);

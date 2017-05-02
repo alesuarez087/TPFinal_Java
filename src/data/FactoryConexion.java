@@ -5,14 +5,19 @@ import utils.*;
 
 public class FactoryConexion {
 
-	//private String dbDriver="com.mysql.jdbc.Driver";
-		private String host="localhost";
+		//private String dbDriver="com.mysql.jdbc.Driver";
+		//private String host= "mysql27943-env-7126744.jl.serv.net.mx";
+		private String user="root";
+		//private String pass="TBDkyq99779";
+		//private String db="tpjava_final";
+		//private String host="localhost";
 		private String port="3306";
-		private String user="java";
-		private String pass="java";
+		//private String user="java";
+		//private String pass="java";
 		private String db="java_tpfinal";
 		private String dbType="mysql";
-		
+		private String host= "mysql27947-luzbelito.jl.serv.net.mx";
+		private String pass="TZThgi64119";
 		private Connection conn;
 		private int cantConn=0;
 		

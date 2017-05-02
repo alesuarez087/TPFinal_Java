@@ -83,8 +83,7 @@
 				<td><%=vi.GetItem().GetArtista().getNombre() %></td>
 				<td>
 					<% Clasificacion cl = ctrl.getOneClasificacion(vi.GetItem().getId(), user.getId());
-			if(cl !=null){ %> <%= cl.getValor() %>
-					<% } %>
+			if(cl !=null){ %> <%= cl.getValor() %> <% } %>
 				</td>
 				<form role="form" action="srvCalificar" method="post" id="botonera"
 					name="botonera">

@@ -130,9 +130,7 @@ function valida(){
 			</div>
 		</form>
 
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 
 		<table class="table table-hover" style="background-color: #ffffff">
 			<thead>

@@ -84,8 +84,9 @@
 					$<%=ctrl.getOnePrecioToday(item.getId()).getValor() %></h4>
 				<form action="srvCompra" method="post" id="compra" name="compra">
 					<input type="hidden" name="idSelect" id="idSelect"
-						value="<%=item.getId()%>" /> <input class="btn btn-success btn-sm"
-						type="submit" value="Agregar" id="eventSale" name="eventSale" />
+						value="<%=item.getId()%>" /> <input
+						class="btn btn-success btn-sm" type="submit" value="Agregar"
+						id="eventSale" name="eventSale" />
 				</form>
 			</div>
 			<% } %>
@@ -103,8 +104,9 @@
 					$<%=ctrl.getOnePrecioToday(item.getId()).getValor() %></h4>
 				<form action="srvCompra" method="post" id="compra" name="compra">
 					<input type="hidden" name="idSelect" id="idSelect"
-						value="<%=item.getId()%>" /> <input class="btn btn-success btn-sm"
-						type="submit" value="Agregar" id="eventSale" name="eventSale" />
+						value="<%=item.getId()%>" /> <input
+						class="btn btn-success btn-sm" type="submit" value="Agregar"
+						id="eventSale" name="eventSale" />
 				</form>
 			</div>
 			<% } %>
@@ -122,8 +124,9 @@
 					$<%=ctrl.getOnePrecioToday(item.getId()).getValor() %></h4>
 				<form action="srvCompra" method="post" id="compra" name="compra">
 					<input type="hidden" name="idSelect" id="idSelect"
-						value="<%=item.getId()%>" /> <input class="btn btn-success btn-sm"
-						type="submit" value="Agregar" id="eventSale" name="eventSale" />
+						value="<%=item.getId()%>" /> <input
+						class="btn btn-success btn-sm" type="submit" value="Agregar"
+						id="eventSale" name="eventSale" />
 				</form>
 			</div>
 			<% } %>
@@ -141,8 +144,9 @@
 					$<%=ctrl.getOnePrecioToday(item.getId()).getValor() %></h4>
 				<form action="srvCompra" method="post" id="compra" name="compra">
 					<input type="hidden" name="idSelect" id="idSelect"
-						value="<%=item.getId()%>" /> <input class="btn btn-success btn-sm"
-						type="submit" value="Agregar" id="eventSale" name="eventSale" />
+						value="<%=item.getId()%>" /> <input
+						class="btn btn-success btn-sm" type="submit" value="Agregar"
+						id="eventSale" name="eventSale" />
 				</form>
 			</div>
 			<% } %>

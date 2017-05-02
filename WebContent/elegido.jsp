@@ -108,8 +108,9 @@
 						</tr>
 					</table>
 					<input type="hidden" name="idSelect" id="idSelect"
-						value="<%=item.getId()%>" /> <input class="btn btn-success btn-sm"
-						type="submit" value="Agregar" id="addCarrito" name="addCarrito" />
+						value="<%=item.getId()%>" /> <input
+						class="btn btn-success btn-sm" type="submit" value="Agregar"
+						id="addCarrito" name="addCarrito" />
 				</div>
 			</div>
 		</form>

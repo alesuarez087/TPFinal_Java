@@ -114,9 +114,7 @@
 			</div>
 		</form>
 
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 
 		<table class="table table-hover">
 			<thead>
