@@ -53,19 +53,24 @@ public class srvCompra extends HttpServlet {
 		}
 		
 		if(request.getParameter("addCarrito")!=null){
-			if(Validate.HayStock(((Item)request.getSession().getAttribute("item")).getId(), Integer.parseInt(request.getParameter("cmbCantidad"))))
-			{
-				ArrayList<VentaItem> carrito;
-				if((ArrayList<VentaItem>)request.getSession().getAttribute("carrito")!=null) carrito = (ArrayList<VentaItem>)request.getSession().getAttribute("carrito");
-					else carrito = new ArrayList<VentaItem>();
-				VentaItem fila = new VentaItem();
-				fila.setIdItem(((Item)request.getSession().getAttribute("item")).getId());
-				fila.setCantidad(Integer.parseInt(request.getParameter("cmbCantidad")));
-				carrito.add(fila);
-				request.getSession().setAttribute("carrito", carrito);
-				request.getRequestDispatcher("itemTop.jsp").forward(request, response);
+			if(request.getParameter("cmbCantidad") != null){
+				if(Validate.HayStock(((Item)request.getSession().getAttribute("item")).getId(), Integer.parseInt(request.getParameter("cmbCantidad"))))
+				{
+					ArrayList<VentaItem> carrito;
+					if((ArrayList<VentaItem>)request.getSession().getAttribute("carrito")!=null) carrito = (ArrayList<VentaItem>)request.getSession().getAttribute("carrito");
+						else carrito = new ArrayList<VentaItem>();
+					VentaItem fila = new VentaItem();
+					fila.setIdItem(((Item)request.getSession().getAttribute("item")).getId());
+					fila.setCantidad(Integer.parseInt(request.getParameter("cmbCantidad")));
+					carrito.add(fila);
+					request.getSession().setAttribute("carrito", carrito);
+					request.getRequestDispatcher("itemTop.jsp").forward(request, response);
+				} else{
+					request.getSession().setAttribute("errorStock", "No hay stock para satisfacer su compra");
+					request.getRequestDispatcher("valid.jsp").forward(request, response);
+				}
 			} else{
-				request.getSession().setAttribute("errorStock", "No hay stock para satisfacer su compra");
+				request.getSession().setAttribute("message", "No ingresó cantidad !");
 				request.getRequestDispatcher("valid.jsp").forward(request, response);
 			}
 		}

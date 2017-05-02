@@ -73,11 +73,13 @@
 			<div class="panel-body">
 				<form role="form" action="srvInicio" method="post" id="formReg"
 					name="formReg">
+					<%if (request.getAttribute("messageError2")!=null){ %>
 					<div class="form-group">
-						<%if (request.getAttribute("messageError2")!=null){ %>
 						<font color="#FF0000"> <%=request.getAttribute("messageError2") %>
 						</font>
+					</div>
 						<%} %>
+					<div class="form-group">
 						<label for="user">Usuario</label> <input type="text"
 							class="form-control" id="userCreate" name="userCreate">
 					</div>

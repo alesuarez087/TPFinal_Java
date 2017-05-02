@@ -63,23 +63,28 @@ public class srvInicio extends HttpServlet {
 			user = ctrl.getOneUsuarioForName(request.getParameter("userCreate"));
 			if(user == null){
 				if(Validate.Email(request.getParameter("email"))){
-					user = new Usuario();
-					user.setDni(request.getParameter("email"));
-					user.setNombreUsuario(request.getParameter("userCreate"));
-					user.setApellido(request.getParameter("apellido"));
-					user.setClave(request.getParameter("passCreate"));
-					user.setEmail(request.getParameter("dni"));
-					user.setHabilitado(true);
-					user.setNombre(request.getParameter("nombre"));
-					user.setTipoUsuario(TiposUsuario.Usuario);
-					user.setState(States.Alta);
-					ctrl.save(user);
-					request.setAttribute("messageError2", "Usuario Creado Correctamente");
-					request.getRequestDispatcher("login.jsp").forward(request, response);
-				}
-				else{
-					request.setAttribute("messageError2", "Email inválido");
-					request.getRequestDispatcher("login.jsp").forward(request, response);
+					if(Validate.EsNumerico(request.getParameter("dni"))){
+						user = new Usuario();
+						user.setDni(request.getParameter("email"));
+						user.setNombreUsuario(request.getParameter("userCreate"));
+						user.setApellido(request.getParameter("apellido"));
+						user.setClave(request.getParameter("passCreate"));
+						user.setEmail(request.getParameter("dni"));
+						user.setHabilitado(true);
+						user.setNombre(request.getParameter("nombre"));
+						user.setTipoUsuario(TiposUsuario.Usuario);
+						user.setState(States.Alta);
+						ctrl.save(user);
+						request.setAttribute("messageError2", "Usuario Creado Correctamente");
+						request.getRequestDispatcher("login.jsp").forward(request, response);
+
+					}else{
+						request.setAttribute("messageError2", "DNI inválido");
+						request.getRequestDispatcher("login.jsp").forward(request, response);
+					}
+				} else{
+					 request.setAttribute("messageError2", "Email inválido");
+					 request.getRequestDispatcher("login.jsp").forward(request, response);
 				} 
 			} else{
 				request.setAttribute("messageError2", "Ya existe un Usuario con ese nombre");

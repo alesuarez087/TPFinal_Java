@@ -17,7 +17,7 @@
 	Controlador ctrl = new Controlador(); 
 	Usuario user = (Usuario)request.getSession().getAttribute("userSession");
 	ArrayList<VentaItem> carrito = (ArrayList<VentaItem>) request.getSession().getAttribute("carrito");
-	if(user != null){ if(user.getTipoUsuario() == Usuario.TiposUsuario.Usuario){  
+	if(user != null){   
 %>
 <body>
 
@@ -72,7 +72,6 @@
 	</div>
 </body>
 <%
-	} else response.sendRedirect("adminInicio.jsp");
 	} else response.sendRedirect("login.jsp");
  %>
 </html>

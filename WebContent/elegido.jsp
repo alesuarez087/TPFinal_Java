@@ -92,6 +92,19 @@
 									<%=(double)Math.rint(ctrl.getPromedio(item.getId())) %></h2>
 							</td>
 						</tr>
+						<%
+							if(request.getSession().getAttribute("message")!=null){
+						%>
+						<tr>
+							<td colspan=2>
+								<h2>
+									<font color="#FF0000"> <%=request.getAttribute("message") %></font>
+							</td>
+						</tr>
+						<%
+							request.getSession().setAttribute("message", null);}
+						%>
+						
 						<tr>
 							<td style="vertical-align: middle">
 								<h3>Cantidad</h3>
