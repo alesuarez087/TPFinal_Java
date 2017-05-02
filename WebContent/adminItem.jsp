@@ -60,6 +60,15 @@
 		<form role="form" action="srvItem" method="post" id="formTabla"
 			name="formTabla">
 			<table>
+			<% if(request.getSession().getAttribute("message")!=null){ %>
+			<tr>
+				<td>
+					<font color="#FF0000"> <%=request.getSession().getAttribute("message") %></font>
+				</td>
+			</tr>
+			<%
+				request.getSession().setAttribute("message", null);}
+			%>
 				<tr>
 					<td><b>Código:</b></td>
 					<td><input type="text" readonly class="form-control"
@@ -202,16 +211,14 @@
 					<td><%= item.GetPrecio().getValor() %></td>
 					<td><%= item.getStock() %></td>
 					<td style="vertical-olign: middle"><input type="checkbox"
-						readonly disabled <%if(item.isHabilitado()){ %> checked <%} %>>
+						readonly disabled <%if(item.isHabilitado()){ %> checked <%} %>> </td>
 					<td></td>
-					<form role="form" action="srvItem" method="post" id="botonera"
-						name="botonera">
-						<td style="vertical-align: middle"><input type="hidden"
-							name="idSelect" id="idSelect" value="<%=item.getId()%>" /> <input
-							class="btn btn-success btn-sm" type="submit" value="Modificar"
-							id="eventUpdate" name="eventUpdate" /> <input
-							class="btn btn-danger btn-sm" type="submit" value="Eliminar"
-							id="eventDelete" name="eventDelete" /></td>
+					<form role="form" action="srvItem" method="post" id="botonera" name="botonera">
+						<td style="vertical-align: middle">
+						<input type="hidden" name="idSelect" id="idSelect" value="<%=item.getId()%>" /> 
+						<input class="btn btn-success btn-sm" type="submit" value="Modificar" id="eventUpdate" name="eventUpdate" /> 
+						<input class="btn btn-danger btn-sm" type="submit" value="Eliminar" id="eventDelete" name="eventDelete" />
+						</td>
 					</form>
 				</tr>
 				<% 	} %>

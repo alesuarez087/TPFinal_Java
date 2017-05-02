@@ -576,4 +576,29 @@ public class DataItem {
 				if(rs!=null) rs = null;
 			}
 		}
+
+		public static int ultimoItem(){
+			ResultSet rs = null; PreparedStatement stmt = null; int ret = 0;
+			String sql="SELECT MAX(id_item) FROM items;";
+			try{
+				Connection conn = FactoryConexion.getInstancia().getConn();
+				stmt = conn.prepareStatement(sql);
+				rs = stmt.executeQuery();
+				while(rs.next() && rs!=null) ret = rs.getInt(1);
+			} catch(SQLException e){
+				e.printStackTrace();
+			} catch(ApplicationException e){
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					FactoryConexion.getInstancia().releaseConn();
+				} catch (ApplicationException e) {
+					e.printStackTrace();
+				}
+				if(stmt != null) stmt = null;
+				if(rs!=null) rs = null;
+			}
+			return ret;
+		}
 }

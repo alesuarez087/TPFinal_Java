@@ -71,7 +71,7 @@ public class srvCompra extends HttpServlet {
 				}
 			} else{
 				request.getSession().setAttribute("message", "No ingresó cantidad !");
-				request.getRequestDispatcher("valid.jsp").forward(request, response);
+				request.getRequestDispatcher("elegido.jsp").forward(request, response);
 			}
 		}
 		
@@ -84,15 +84,13 @@ public class srvCompra extends HttpServlet {
 				}
 			}
 			request.getSession().setAttribute("carrito", carrito_new);
-			request.getRequestDispatcher("compra.jsp").forward(request, response);
+			request.getRequestDispatcher("carrito.jsp").forward(request, response);
 		}
 		
 		if(request.getParameter("eventConfirmar")!=null){
 			
 			if(Validate.EsNumerico(request.getParameter("nroCalle"))){
 				if(Validate.FormatoNumero(request.getParameter("nroTarjeta"), 16)){
-					if(Validate.Texto(request.getParameter("localidad"))){
-						if(Validate.Texto(request.getParameter("titTarjeta"))){
 							
 							Venta venta = new Venta(); Item item;
 							Usuario user = (Usuario)request.getSession().getAttribute("userSession");
@@ -124,13 +122,7 @@ public class srvCompra extends HttpServlet {
 							request.getSession().setAttribute("compraValida", "Compra exitosa");
 							request.getRequestDispatcher("valid.jsp").forward(request, response);
 							
-						} else{
-							request.getSession().setAttribute("message", "No ingresó Titular de Tarjeta válido");
-							request.getRequestDispatcher("carrito.jsp").forward(request, response);
-						}						
-					} else{
-						request.getSession().setAttribute("message", "No ingresó Localidad válida");
-						request.getRequestDispatcher("carrito.jsp").forward(request, response);
+						
 					}
 				} else{
 					request.getSession().setAttribute("message", "No ingresó Número de tarjeta válido");
@@ -141,6 +133,4 @@ public class srvCompra extends HttpServlet {
 				request.getRequestDispatcher("carrito.jsp").forward(request, response);
 			}
 		}
-	}
-
 }

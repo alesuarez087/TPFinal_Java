@@ -5,7 +5,6 @@ import utils.*;
 
 public class FactoryConexion {
 
-		//private String db="tpjava_final";
 		//private String host="localhost";
 		//private String user="java";
 		//private String pass="java";

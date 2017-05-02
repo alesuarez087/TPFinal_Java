@@ -52,8 +52,8 @@ function valida(){
 					<li><a href="adminItem.jsp">Discos</a></li>
 					<li><a href="adminUsuario.jsp">Usuarios</a></li>
 					<% } %>
-					<li class="active"><a href="adminStockPrecio.jsp">Remarcar<span
-							class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="adminStockPrecio.jsp">Remarcar<span class="sr-only">(current)</span></a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -66,6 +66,15 @@ function valida(){
 		<form role="form" action="srvItem" method="post" id="formTabla"
 			name="formTabla" onsubmit="return valida()">
 			<table>
+				<% if(request.getSession().getAttribute("message")!=null){ %>
+			<tr>
+				<td>
+					<font color="#FF0000"> <%=request.getSession().getAttribute("message") %></font>
+				</td>
+			</tr>
+			<%
+				request.getSession().setAttribute("message", null);}
+			%>
 				<tr>
 					<td><b>Código:</b></td>
 					<td colspan=2><input type="text" readonly class="form-control"

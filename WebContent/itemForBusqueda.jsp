@@ -63,7 +63,7 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
 					<li><a>Seleccione Búsqueda<span class="sr-only">(current)</span></a></li>
-					<li href="itemTop.jsp"><a>Inicio</a></li>
+					<li><a href="itemTop.jsp">Inicio</a></li>
 					<li><a href="itemForGenero.jsp">Géneros</a></li>
 				</ul>
 			</div>

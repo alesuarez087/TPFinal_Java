@@ -106,6 +106,9 @@ public class Controlador {
 		public void save(Item item){
 			DataItem.Save(item);
 		}
+		public int ultimoItem(){
+			return DataItem.ultimoItem();
+		}
 		
 		//PRECIO
 		public Precio getOnePrecioToday(int idItem){

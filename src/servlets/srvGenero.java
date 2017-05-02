@@ -75,7 +75,7 @@ public class srvGenero extends HttpServlet {
 			if(genero.isHabilitado()) request.setAttribute("habilitado", true);
 				else request.setAttribute("habilitado", null);
 			request.getSession().setAttribute("FormSession", "Modificacion");
-			request.getRequestDispatcher("genero.jsp").forward(request, response);
+			request.getRequestDispatcher("adminGenero.jsp").forward(request, response);
 		}
 		
 		if(request.getParameter("clearForm")!=null){
@@ -83,7 +83,7 @@ public class srvGenero extends HttpServlet {
 			request.setAttribute("descGenero", "");
 			request.setAttribute("habilitado", null);
 			request.getSession().setAttribute("FormSession", null);
-			request.getRequestDispatcher("genero.jsp").forward(request, response);
+			request.getRequestDispatcher("adminGenero.jsp").forward(request, response);
 		}
 		
 		if(request.getParameter("eventDelete")!=null){

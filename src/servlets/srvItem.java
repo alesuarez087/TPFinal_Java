@@ -47,51 +47,56 @@ public class srvItem extends HttpServlet {
 		Item item;
 		
 		if(request.getParameter("saveItem")!=null){
-			if(request.getParameter("idItem").equals("")){
-				item = new Item();
-				item.setState(States.Alta);
-				Precio precio = new Precio();
-				precio.setIdItem(item.getId());
-				precio.setValor(Double.parseDouble(request.getParameter("precioItem")));
-				ctrl.save(precio);
-			} else{
-				request.getSession().setAttribute("FormSession", null);
-				item = ctrl.getOneItem(Integer.parseInt(request.getParameter("idItem")));
-				item.setState(States.Modificacion);
-				if(ctrl.getOnePrecioToday(item.getId()).getValor() != Double.parseDouble(request.getParameter("precioItem"))){
-					Precio precio = new Precio();
-					precio.setIdItem(item.getId());
-					precio.setValor(Double.parseDouble(request.getParameter("precioItem")));
-					ctrl.save(precio);
-				}
-			}
-				
-			item.setTitulo(request.getParameter("tituloItem"));
-			item.setAnioLanzamiento(request.getParameter("anioLanzamiento"));
-			item.setHabilitado(true);
-			item.setStock(Integer.parseInt(request.getParameter("stock")));
-			item.setUrlPortada(request.getParameter("urlPortada"));
+			if(Validate.EsNumerico(request.getParameter("precioItem"))){
+				if(Validate.EsNumerico(request.getParameter("stock"))){
+					if(request.getParameter("idItem").equals("")){
+						item = new Item();
+						item.setState(States.Alta);
+					} else{
+						request.getSession().setAttribute("FormSession", null);
+						item = ctrl.getOneItem(Integer.parseInt(request.getParameter("idItem")));
+						item.setState(States.Modificacion);
+						if(ctrl.getOnePrecioToday(item.getId()).getValor() != Double.parseDouble(request.getParameter("precioItem"))){
+							Precio precio = new Precio();
+							precio.setIdItem(item.getId());
+							precio.setValor(Double.parseDouble(request.getParameter("precioItem")));
+							ctrl.save(precio);
+						}
+					}
+						
+					item.setTitulo(request.getParameter("tituloItem"));
+					item.setAnioLanzamiento(request.getParameter("anioLanzamiento"));
+					item.setHabilitado(true);
+					item.setStock(Integer.parseInt(request.getParameter("stock")));
+					item.setUrlPortada(request.getParameter("urlPortada"));
+					
+					Artista art = ctrl.getOneArtista(request.getParameter("cmbArtista"));
+					Genero gen = ctrl.getOneGenero(request.getParameter("cmbGenero"));
+					TipoItem tipo = ctrl.getOneTipoItem(request.getParameter("cmbTipoDisco"));
+							
+					item.setIdArtista(art.getId());
+					item.setIdGenero(gen.getId());
+						
+					switch(tipo.getId()){
+						case 1: item.setTipoDisco(TiposDisco.BlueRay); break;
+						case 2: item.setTipoDisco(TiposDisco.CD); break;
+						case 3: item.setTipoDisco(TiposDisco.DVD); break;
+						case 4: item.setTipoDisco(TiposDisco.Pasta); break;
+						case 5: item.setTipoDisco(TiposDisco.Vinilo); break;
+					}
+							
+					if(item.getState() == States.Alta){
+						if(Validate.ArtistaItem(item.getTitulo(), item.GetArtista().getNombre())){
+							ctrl.save(item);
+							Precio precio = new Precio();
+							precio.setIdItem(ctrl.ultimoItem());
+							precio.setValor(Double.parseDouble(request.getParameter("precioItem")));
+							ctrl.save(precio);
+						} else request.setAttribute("messageError", "Ya fue creado este disco");
+					} else ctrl.save(item);
+				} else request.getSession().setAttribute("message", "Stock Inválido");
+			} else request.getSession().setAttribute("message", "Precio Inválido"); 
 			
-			Artista art = ctrl.getOneArtista(request.getParameter("cmbArtista"));
-			Genero gen = ctrl.getOneGenero(request.getParameter("cmbGenero"));
-			TipoItem tipo = ctrl.getOneTipoItem(request.getParameter("cmbTipoDisco"));
-					
-			item.setIdArtista(art.getId());
-			item.setIdGenero(gen.getId());
-				
-			switch(tipo.getId()){
-				case 1: item.setTipoDisco(TiposDisco.BlueRay); break;
-				case 2: item.setTipoDisco(TiposDisco.CD); break;
-				case 3: item.setTipoDisco(TiposDisco.DVD); break;
-				case 4: item.setTipoDisco(TiposDisco.Pasta); break;
-				case 5: item.setTipoDisco(TiposDisco.Vinilo); break;
-			}
-					
-			if(item.getState() == States.Alta){
-				if(Validate.ArtistaItem(request.getParameter("tituloItem"), request.getParameter("artistaItem"))){
-					ctrl.save(item);
-				} else request.setAttribute("messageError", "Ya fue creado este disco");
-			} else ctrl.save(item);
 			request.getRequestDispatcher("adminItem.jsp").forward(request, response);
 		}
 			
@@ -137,13 +142,6 @@ public class srvItem extends HttpServlet {
 			request.getSession().setAttribute("listado", listado);
 			request.getRequestDispatcher("itemForGenero.jsp").forward(request, response);
 		}
-				
-		if(request.getParameter("buscar") != null){
-			request.getSession().setAttribute("listado", null);
-			ArrayList<Item> listado = ctrl.getBusqueda(request.getParameter("buscar"));
-			request.getSession().setAttribute("listado", listado);
-			request.getRequestDispatcher("itemForBusqueda.jsp").forward(request, response);
-		}
 		
 		if(request.getParameter("eventRemarcar") != null){
 			item = ctrl.getOneItem(Integer.parseInt(request.getParameter("idSelect")));
@@ -168,15 +166,22 @@ public class srvItem extends HttpServlet {
 		}
 		
 		if(request.getParameter("saveRemarcar") != null){
-			item = ctrl.getOneItem(Integer.parseInt(request.getParameter("idItem")));
-			Precio precio = new Precio();
-			precio.setIdItem(item.getId());
-			precio.setValor(Double.parseDouble(request.getParameter("precioNuevo")));
-			item.sumoStock(Integer.parseInt(request.getParameter("stockAgregado")));
-			item.setState(States.Modificacion);
 			
-			ctrl.save(item);
-			ctrl.save(precio);
+			if(!request.getParameter("idItem").equals("")){
+			item = ctrl.getOneItem(Integer.parseInt(request.getParameter("idItem")));
+				if(!request.getParameter("precioNuevo").equals(""))if(Validate.EsNumerico(request.getParameter("precioNuevo"))){
+					Precio precio = new Precio();
+					precio.setIdItem(item.getId());
+					precio.setValor(Double.parseDouble(request.getParameter("precioNuevo")));
+					ctrl.save(precio);
+				} else request.getSession().setAttribute("message", "Precio Inválido");
+				if(!request.getParameter("stock").equals("")) if(Validate.EsNumerico(request.getParameter("stock"))){
+					item.sumoStock(Integer.parseInt(request.getParameter("stockAgregado")));
+					item.setState(States.Modificacion);
+					ctrl.save(item);
+				} else request.getSession().setAttribute("message", "Stock Inválido");
+			} else request.getSession().setAttribute("message", "Elija un Item");
+
 			request.getRequestDispatcher("adminStockPrecio.jsp").forward(request, response);
 		}
 

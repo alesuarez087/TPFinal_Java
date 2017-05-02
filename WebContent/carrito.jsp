@@ -157,7 +157,7 @@ function valida(){
 				<tr>
 					<td><b>Número de Tarjeta</b></td>
 					<td colspan=5><input type="text" class="form-control"
-						id="nroTarjeta" name="nroTarjeta" size="43"></td>
+						id="nroTarjeta" name="nroTarjeta" size="43" placeholder="XXXXXXXXXXXXXXXX"></td>
 				</tr>
 				<tr>
 					<td><b>Titular Tarjeta</b></td>

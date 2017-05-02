@@ -115,7 +115,7 @@ public class DataVenta {
 	}
 	
 	public static void Insert(Venta venta){
-		ResultSet rs = null; PreparedStatement stmt = null; int idVenta = 0;
+		ResultSet rs = null; PreparedStatement stmt = null;
 		String sql="{ call VentasInsert(?, ?, ?, ?, ?, ?, ?, ?, ?) };";
 		try{
 			Connection conn = FactoryConexion.getInstancia().getConn();
